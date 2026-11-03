@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: request-management
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/requests}
+    username: ${DB_USERNAME:requests}
+    password: ${DB_PASSWORD:requests}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+request-management:
+  pagination:
+    default-size: ${PAGINATION_DEFAULT_SIZE:10}
+    max-size: ${PAGINATION_MAX_SIZE:100}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

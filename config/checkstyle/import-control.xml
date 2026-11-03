@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE import-control PUBLIC
+        "-//Checkstyle//DTD ImportControl Configuration 1.4//EN"
+        "https://checkstyle.org/dtds/import_control_1_4.dtd">
+
+<!--
+    Layer boundaries of the hexagon:
+      domain         -> depends on nothing else in the application, no web or persistence technology
+      endpoint       -> may use the domain, never the infrastructure
+      infrastructure -> may use the domain, never the endpoint
+    Anything not disallowed below is allowed.
+-->
+<import-control pkg="pl.bzdon.requestmanagement" strategyOnMismatch="allowed">
+
+    <subpackage name="domain">
+        <disallow pkg="pl.bzdon.requestmanagement.endpoint"/>
+        <disallow pkg="pl.bzdon.requestmanagement.infrastructure"/>
+        <disallow pkg="jakarta.persistence"/>
+        <disallow pkg="org.hibernate"/>
+        <disallow pkg="org.springframework.data"/>
+        <disallow pkg="org.springframework.jdbc"/>
+        <disallow pkg="org.springframework.web"/>
+        <disallow pkg="org.springframework.http"/>
+    </subpackage>
+
+    <subpackage name="endpoint">
+        <disallow pkg="pl.bzdon.requestmanagement.infrastructure"/>
+        <disallow pkg="jakarta.persistence"/>
+        <disallow pkg="org.hibernate"/>
+        <disallow pkg="org.springframework.data"/>
+        <disallow pkg="org.springframework.jdbc"/>
+    </subpackage>
+
+    <subpackage name="infrastructure">
+        <disallow pkg="pl.bzdon.requestmanagement.endpoint"/>
+        <disallow pkg="org.springframework.web"/>
+        <disallow pkg="org.springframework.http"/>
+    </subpackage>
+
+</import-control>
